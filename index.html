@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceX — Scientific Instrumentation Portal</title>
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+
+<video id="bg-video" class="bg-video" autoplay muted playsinline></video>
+<div class="bg-overlay"></div>
+<div class="nebula-container">
+  <div class="nebula n1"></div>
+  <div class="nebula n2"></div>
+  <div class="nebula n3"></div>
+  <div class="nebula n4"></div>
+</div>
+<canvas id="starfield"></canvas>
+<img src="assets/spacex-logo.png" class="watermark" alt="">
+
+<div class="page-wrap">
+
+  <!-- Nav -->
+  <nav class="nav anim-fade-in" style="animation-delay:0.1s">
+    <img src="assets/spacex-logo.png" class="nav-logo" alt="SpaceX">
+    <span class="nav-title">Scientific Instrumentation Portal</span>
+    <div></div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-eyebrow anim-fade-up" style="animation-delay:0.3s">Mission Control — Payload Division</p>
+    <h1 class="anim-fade-up" style="animation-delay:0.5s">Scientific Payload<br><span>Expense Dashboard</span></h1>
+    <p class="hero-sub anim-fade-up" style="animation-delay:0.75s">Secure, mission-critical financial oversight for SpaceX scientific instrumentation programs.</p>
+
+    <!-- Mission Stats -->
+    <div class="stats-row">
+      <div class="stat-card anim-fade-up" style="animation-delay:1.0s">
+        <span class="stat-value">12</span>
+        <span class="stat-label">Instruments</span>
+      </div>
+      <div class="stat-card anim-fade-up" style="animation-delay:1.15s">
+        <span class="stat-value">$17.2M</span>
+        <span class="stat-label">Total Value</span>
+      </div>
+      <div class="stat-card anim-fade-up" style="animation-delay:1.3s">
+        <span class="stat-value">90-Day</span>
+        <span class="stat-label">Validity Period</span>
+      </div>
+    </div>
+
+    <button class="btn-primary anim-fade-up" style="animation-delay:1.5s" onclick="document.getElementById('login-modal').classList.add('open')">
+      ACCESS PORTAL
+    </button>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section anim-fade-in" style="animation-delay:1.7s">
+    <p class="section-heading">— Covered Instruments &amp; Packages —</p>
+    <div class="features-grid" id="features-grid"></div>
+  </section>
+
+</div>
+
+<!-- Login Modal -->
+<div id="login-modal" class="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('login-modal').classList.remove('open')">&times;</button>
+    <h2>PORTAL ACCESS</h2>
+
+    <div class="role-toggle">
+      <button class="role-tab active" id="tab-user" onclick="setTab('user')">USER</button>
+      <button class="role-tab" id="tab-admin" onclick="setTab('admin')">ADMIN</button>
+    </div>
+
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="login-user" autocomplete="username" placeholder="">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-pass" autocomplete="current-password" placeholder="">
+    </div>
+    <p class="form-error" id="login-error"></p>
+    <button class="btn-submit" onclick="doLogin()">AUTHENTICATE</button>
+  </div>
+</div>
+
+<script src="src/app.js"></script>
+<script>
+  initStarfield('starfield');
+  initVideoBackground('bg-video');
+
+  if (sessionStorage.getItem('sx_role') === 'admin') location.href = 'admin.html';
+  else if (sessionStorage.getItem('sx_role') === 'user') location.href = 'user.html';
+
+  let activeTab = 'user';
+
+  function setTab(tab) {
+    activeTab = tab;
+    document.getElementById('tab-user').classList.toggle('active', tab === 'user');
+    document.getElementById('tab-admin').classList.toggle('active', tab === 'admin');
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-error').textContent = '';
+  }
+
+  function doLogin() {
+    const u = document.getElementById('login-user').value.trim();
+    const p = document.getElementById('login-pass').value;
+    const err = document.getElementById('login-error');
+    err.textContent = '';
+    if (!attemptLogin(u, p)) {
+      err.textContent = 'Invalid credentials. Access denied.';
+      document.getElementById('login-pass').value = '';
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('login-modal').classList.contains('open')) doLogin();
+    if (e.key === 'Escape') document.getElementById('login-modal').classList.remove('open');
+  });
+
+  loadData().then(data => {
+    const grid = document.getElementById('features-grid');
+    data.sections.flatMap(s => s.items).forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'feature-card anim-fade-up';
+      div.style.animationDelay = (1.8 + i * 0.06) + 's';
+      div.textContent = item.name;
+      grid.appendChild(div);
+    });
+  });
+</script>
+</body>
+</html>

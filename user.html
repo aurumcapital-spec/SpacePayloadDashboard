@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceX — User Portal</title>
+<link rel="stylesheet" href="src/style.css">
+<style>
+  @media print {
+    #bg-video, .bg-overlay, .nebula-container, #starfield, .watermark, .nav, .btn-print { display: none !important; }
+    body { background: #fff !important; color: #111 !important; }
+    .dashboard { max-width: 100%; padding: 0; }
+    table.data-table thead th, .fin-summary { background: #f5f5f5 !important; }
+    tr.section-header td { background: #e8ecf4 !important; color: #333 !important; }
+  }
+</style>
+</head>
+<body>
+
+<video id="bg-video" class="bg-video" autoplay muted playsinline></video>
+<div class="bg-overlay"></div>
+<div class="nebula-container">
+  <div class="nebula n1"></div>
+  <div class="nebula n2"></div>
+  <div class="nebula n3"></div>
+  <div class="nebula n4"></div>
+</div>
+<canvas id="starfield"></canvas>
+<img src="assets/spacex-logo.png" class="watermark" alt="">
+
+<div class="page-wrap">
+
+  <!-- Nav -->
+  <nav class="nav anim-fade-in" style="animation-delay:0.1s">
+    <img src="assets/spacex-logo.png" class="nav-logo" alt="SpaceX">
+    <span class="nav-title">User Portal — Read Only</span>
+    <div class="nav-right">
+      <span class="nav-user" id="nav-user"></span>
+    </div>
+  </nav>
+
+  <div class="dashboard">
+
+    <h1 class="dash-title anim-slide-left" style="animation-delay:0.2s">PAYLOAD STATEMENT</h1>
+    <p class="dash-sub anim-fade-in" style="animation-delay:0.35s">Read-only view. Contact your admin to update payment status.</p>
+
+    <!-- Metrics -->
+    <div class="metrics-row">
+      <div class="metric-card m-grand anim-fade-up" style="animation-delay:0.45s">
+        <div class="metric-label">Grand Total</div>
+        <div class="metric-value" id="metric-grand">—</div>
+      </div>
+      <div class="metric-card m-paid anim-fade-up" style="animation-delay:0.55s">
+        <div class="metric-label">Amount Paid</div>
+        <div class="metric-value" id="metric-paid">—</div>
+      </div>
+      <div class="metric-card m-out anim-fade-up" style="animation-delay:0.65s">
+        <div class="metric-label">Outstanding</div>
+        <div class="metric-value" id="metric-outstanding">—</div>
+      </div>
+      <div class="metric-card m-pct anim-fade-up" style="animation-delay:0.75s">
+        <div class="metric-label">Payment Progress</div>
+        <div class="metric-value" id="metric-pct">0%</div>
+        <div class="progress-wrap" style="margin-top:12px">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item Table -->
+    <div class="table-wrap anim-fade-up" style="animation-delay:0.9s">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th style="text-align:right">Unit Price</th>
+            <th style="text-align:center">Status</th>
+          </tr>
+        </thead>
+        <tbody id="item-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- Financial Summary -->
+    <div class="fin-summary anim-fade-up" style="animation-delay:1.0s">
+      <h3>Financial Summary</h3>
+      <div class="fin-row">
+        <span class="fin-label">Subtotal</span>
+        <span class="fin-val" id="sum-subtotal">—</span>
+      </div>
+      <div class="fin-row">
+        <span class="fin-label">Contingency (10%)</span>
+        <span class="fin-val" id="sum-contingency">—</span>
+      </div>
+      <div class="fin-row total-row">
+        <span>Grand Total</span>
+        <span id="sum-grand">—</span>
+      </div>
+    </div>
+
+    <!-- Print -->
+    <div class="receipt-row anim-fade-up" style="animation-delay:1.1s">
+      <button class="btn-print" onclick="window.print()">PRINT STATEMENT</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="src/app.js"></script>
+<script>
+  requireAuth('user');
+  initStarfield('starfield');
+  initVideoBackground('bg-video');
+  mountProfilePanel();
+
+  async function init() {
+    const data = await loadData();
+    const paid = getPaidSet();
+
+    document.getElementById('sum-subtotal').textContent    = '$' + data.subtotal.toLocaleString();
+    document.getElementById('sum-contingency').textContent = '$' + data.contingency.toLocaleString();
+    document.getElementById('sum-grand').textContent       = '$' + data.grandTotal.toLocaleString();
+
+    buildTable(data, paid, false);
+    updateMetrics(data, paid);
+  }
+
+  init();
+</script>
+</body>
+</html>

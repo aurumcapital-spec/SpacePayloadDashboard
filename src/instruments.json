@@ -1,0 +1,47 @@
+{
+  "sections": [
+    {
+      "id": "section1",
+      "label": "SECTION 1 — SCIENTIFIC INSTRUMENTS",
+      "items": [
+        { "id": 1,  "name": "Photometers",                              "price": 250000,   "note": "" },
+        { "id": 2,  "name": "Polarimeters",                             "price": 320000,   "note": "" },
+        { "id": 3,  "name": "Magnetosphere Imager",                     "price": 1200000,  "note": "" },
+        { "id": 4,  "name": "Planetary Radio Astronomy Instruments",    "price": 850000,   "note": "" },
+        { "id": 5,  "name": "Imaging Instruments",                      "price": 1500000,  "note": "" },
+        { "id": 6,  "name": "Mass Spectrometers",                       "price": 2000000,  "note": "" },
+        { "id": 7,  "name": "Science Payload (Integrated Package)",     "price": 3500000,  "note": "" },
+        { "id": 8,  "name": "Direct- and Remote-sensing Instruments",   "price": 1800000,  "note": "" },
+        { "id": 9,  "name": "Remote-sensing Instruments",               "price": 1200000,  "note": "" },
+        { "id": 10, "name": "Active and Passive Instruments",           "price": 1400000,  "note": "" },
+        { "id": 11, "name": "High-energy Particle Detectors",           "price": 950000,   "note": "" },
+        { "id": 12, "name": "Low-energy Charged-particle Detectors",    "price": 700000,   "note": "" }
+      ]
+    },
+    {
+      "id": "section2",
+      "label": "SECTION 2 — BASIC NECESSITIES FOR INTERNS",
+      "items": [
+        { "id": 13, "name": "Intern Basic Necessities Package", "price": 0, "note": "Paid interns to collect remaining paid items from stationary office" }
+      ]
+    },
+    {
+      "id": "section3",
+      "label": "SECTION 3 — NEW RESIDENTIAL REGISTRATION",
+      "items": [
+        { "id": 14, "name": "Full Registration — Homes / Workspace / Office", "price": 26000, "note": "Includes intern residence mapping for services, directions and supplies" },
+        { "id": 15, "name": "Down Payment — Residential",                      "price": 7500,  "note": "" }
+      ]
+    }
+  ],
+  "subtotal": 15670000,
+  "contingencyRate": 0.10,
+  "contingency": 1567000,
+  "grandTotal": 17237000,
+  "validity": "90 days",
+  "missionStats": {
+    "instruments": 12,
+    "total": "$17.2M",
+    "validity": "90-Day"
+  }
+}
