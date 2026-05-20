@@ -446,7 +446,7 @@ async function generateReceipt() {
 </style>
 </head>
 <body>
-<img src="../assets/spacex-logo.png" class="logo" alt="SpaceX">
+<img src="../assets/spacex-logo.svg" class="logo" alt="SpaceX">
 <h1>SCIENTIFIC INSTRUMENTATION RECEIPT</h1>
 <div class="meta">
   Generated: ${dateStr} at ${timeStr}<br>

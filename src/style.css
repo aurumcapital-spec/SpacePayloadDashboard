@@ -191,11 +191,10 @@ body::after {
   position: fixed;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 420px;
-  opacity: 0.04;
+  width: 480px;
+  opacity: 0.045;
   pointer-events: none;
   z-index: 5;
-  filter: invert(1) brightness(2);
 }
 
 /* ─── Layout Wrapper ────────────────────────────────────────────────────── */
@@ -220,9 +219,8 @@ body::after {
 }
 
 .nav-logo {
-  height: 28px;
-  filter: invert(1) brightness(2);
-  opacity: 0.9;
+  height: 22px;
+  opacity: 0.92;
 }
 
 .nav-title {
