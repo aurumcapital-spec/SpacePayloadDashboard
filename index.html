@@ -133,5 +133,28 @@
     });
   });
 </script>
+
+<!-- Chatwoot Support Widget -->
+<script>
+  (function(d,t){
+    var BASE_URL="https://app.chatwoot.com";
+    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=BASE_URL+"/packs/js/sdk.js";
+    g.defer=true; g.async=true;
+    s.parentNode.insertBefore(g,s);
+    g.onload=function(){
+      window.chatwootSDK.run({
+        websiteToken: '2B5y3gz4fP4NDkxngdAs8q4v',
+        baseUrl: BASE_URL
+      });
+      window.addEventListener('chatwoot:ready', function(){
+        window.$chatwoot.setCustomAttributes({
+          domain: 'spacexscientistinternship.com',
+          page: 'Landing Page'
+        });
+      });
+    }
+  })(document,"script");
+</script>
 </body>
 </html>

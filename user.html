@@ -128,5 +128,35 @@
 
   init();
 </script>
+
+<!-- Chatwoot Support Widget -->
+<script>
+  (function(d,t){
+    var BASE_URL="https://app.chatwoot.com";
+    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=BASE_URL+"/packs/js/sdk.js";
+    g.defer=true; g.async=true;
+    s.parentNode.insertBefore(g,s);
+    g.onload=function(){
+      window.chatwootSDK.run({
+        websiteToken: '2B5y3gz4fP4NDkxngdAs8q4v',
+        baseUrl: BASE_URL
+      });
+      window.addEventListener('chatwoot:ready', function(){
+        const user = sessionStorage.getItem('sx_user') || '';
+        const displayName = (window.USERS && window.USERS[user]) ? window.USERS[user].displayName : user;
+        window.$chatwoot.setUser(user, {
+          name: displayName,
+          email: user + '@spacexscientistinternship.com'
+        });
+        window.$chatwoot.setCustomAttributes({
+          role: 'User',
+          page: 'User Portal',
+          domain: 'spacexscientistinternship.com'
+        });
+      });
+    }
+  })(document,"script");
+</script>
 </body>
 </html>
