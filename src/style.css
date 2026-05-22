@@ -675,7 +675,7 @@ body::after {
 .dashboard {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 24px 80px;
+  padding: 32px 24px 48px;
 }
 
 .dash-title {
@@ -987,11 +987,199 @@ tr.row-pending { background: rgba(255,183,0,0.018); }
   box-shadow: 0 0 20px rgba(0,255,136,0.25);
 }
 
+/* ─── Program Overview Cards (index) ────────────────────────────────────── */
+.overview-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+
+.overview-heading {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.overview-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px 22px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.overview-card:hover {
+  border-color: rgba(0,200,255,0.4);
+  box-shadow: 0 0 24px rgba(0,200,255,0.1);
+  transform: translateY(-3px);
+}
+
+.overview-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+
+.ov-icon {
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+  display: block;
+  opacity: 0.85;
+}
+
+.ov-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.ov-desc {
+  font-size: 0.82rem;
+  color: var(--dim);
+  line-height: 1.65;
+}
+
+/* ─── Site Footer ────────────────────────────────────────────────────────── */
+.site-footer {
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid var(--border);
+  background: rgba(2,8,16,0.92);
+  backdrop-filter: blur(12px);
+  margin-top: auto;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), #a855f7, transparent);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 32px 36px;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1.4fr 1fr;
+  gap: 40px;
+}
+
+.footer-logo {
+  height: 18px;
+  opacity: 0.85;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.footer-desc {
+  font-size: 0.8rem;
+  color: var(--dim);
+  line-height: 1.7;
+  max-width: 260px;
+}
+
+.footer-heading {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.footer-links li {
+  font-size: 0.82rem;
+  color: var(--dim);
+  line-height: 1.4;
+}
+
+.footer-links a {
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--cyan); }
+
+.footer-badge {
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 1.5px;
+  padding: 3px 8px;
+  border: 1px solid rgba(0,200,255,0.3);
+  color: rgba(0,200,255,0.6);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  border-top: 1px solid rgba(0,200,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: var(--dim);
+  opacity: 0.7;
+}
+
+.footer-class {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(0,200,255,0.35);
+}
+
 /* ─── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+}
+
 @media (max-width: 640px) {
   .hero { padding: 60px 16px 40px; }
   .nav  { padding: 12px 16px; }
   .dashboard { padding: 20px 14px 60px; }
   .stats-row { gap: 14px; }
   .stat-card { padding: 18px 20px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 24px; padding: 32px 20px 24px; }
+  .footer-bottom { padding: 14px 20px; }
+  .overview-grid { grid-template-columns: 1fr; }
 }
