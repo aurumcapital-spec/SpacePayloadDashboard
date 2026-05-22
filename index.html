@@ -37,15 +37,15 @@
 
     <!-- Mission Stats -->
     <div class="stats-row">
-      <div class="stat-card anim-fade-up" style="animation-delay:1.0s">
+      <div class="stat-card anim-fade-up" style="animation-delay:1.0s" onclick="document.getElementById('login-modal').classList.add('open')">
         <span class="stat-value">12</span>
         <span class="stat-label">Instruments</span>
       </div>
-      <div class="stat-card anim-fade-up" style="animation-delay:1.15s">
+      <div class="stat-card anim-fade-up" style="animation-delay:1.15s" onclick="document.getElementById('login-modal').classList.add('open')">
         <span class="stat-value">$17.2M</span>
         <span class="stat-label">Total Value</span>
       </div>
-      <div class="stat-card anim-fade-up" style="animation-delay:1.3s">
+      <div class="stat-card anim-fade-up" style="animation-delay:1.3s" onclick="document.getElementById('login-modal').classList.add('open')">
         <span class="stat-value">90-Day</span>
         <span class="stat-label">Validity Period</span>
       </div>
@@ -66,22 +66,22 @@
   <section class="overview-section anim-fade-in" style="animation-delay:2.0s">
     <p class="overview-heading">Program Overview</p>
     <div class="overview-grid">
-      <div class="overview-card">
+      <div class="overview-card" onclick="document.getElementById('login-modal').classList.add('open')">
         <span class="ov-icon">🛰️</span>
         <div class="ov-title">Payload Management</div>
         <p class="ov-desc">Track and manage all 12 scientific instruments across the SpaceX payload division with mission-critical financial control and full audit visibility.</p>
       </div>
-      <div class="overview-card">
+      <div class="overview-card" onclick="document.getElementById('login-modal').classList.add('open')">
         <span class="ov-icon">📊</span>
         <div class="ov-title">Real-Time Financials</div>
         <p class="ov-desc">Live payment status tracking with instant toggle controls, progress visualisation, and automated professional invoice generation on demand.</p>
       </div>
-      <div class="overview-card">
+      <div class="overview-card" onclick="document.getElementById('login-modal').classList.add('open')">
         <span class="ov-icon">🔐</span>
         <div class="ov-title">Secure Access</div>
         <p class="ov-desc">Role-based authentication for administrators and authorised personnel. Each session is tracked with a unique ID, clearance level, and login timestamp.</p>
       </div>
-      <div class="overview-card">
+      <div class="overview-card" onclick="document.getElementById('login-modal').classList.add('open')">
         <span class="ov-icon">⏱️</span>
         <div class="ov-title">Mission Integrity</div>
         <p class="ov-desc">90-day validity periods ensure all pricing and programme agreements remain current throughout the full instrumentation and delivery lifecycle.</p>
@@ -192,6 +192,10 @@
     if (e.key === 'Escape') document.getElementById('login-modal').classList.remove('open');
   });
 
+  function openModal() {
+    document.getElementById('login-modal').classList.add('open');
+  }
+
   loadData().then(data => {
     const grid = document.getElementById('features-grid');
     data.sections.flatMap(s => s.items).forEach((item, i) => {
@@ -199,6 +203,7 @@
       div.className = 'feature-card anim-fade-up';
       div.style.animationDelay = (1.8 + i * 0.06) + 's';
       div.textContent = item.name;
+      div.onclick = openModal;
       grid.appendChild(div);
     });
   });

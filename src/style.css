@@ -541,6 +541,14 @@ body::after {
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.feature-card:hover {
+  border-color: rgba(0,200,255,0.45);
+  box-shadow: 0 0 18px rgba(0,200,255,0.12);
+  transform: translateY(-2px);
 }
 
 .feature-card::before {
@@ -1018,6 +1026,7 @@ tr.row-pending { background: rgba(255,183,0,0.018); }
   position: relative;
   overflow: hidden;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
 }
 
 .overview-card:hover {
